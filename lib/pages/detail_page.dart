@@ -3,10 +3,10 @@ import 'package:playground_app/models/contact.dart';
 import 'package:playground_app/widgets/contact_icon.dart';
 import 'package:playground_app/services/contact-service.dart';
 import 'package:playground_app/widgets/contact_tile.dart';
-import 'package:playground_app/controller.dart';
+import 'package:playground_app/singleton.dart';
 
 class DetailPage extends StatelessWidget {
-  PageController controller = new PageController(initialPage: Controller().getIndex());
+  PageController controller = new PageController(initialPage: Singleton.getIndex());
 
   @override
   Widget build(BuildContext context) {

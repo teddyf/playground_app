@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:playground_app/models/contact.dart';
 import 'package:playground_app/services/contact-service.dart';
 import 'package:playground_app/pages/detail_page.dart';
-import 'package:playground_app/controller.dart';
+import 'package:playground_app/singleton.dart';
 
 class ContactPage extends StatelessWidget {
 
@@ -47,7 +47,7 @@ class ContactListTile extends ListTile {
     subtitle: Text(contact.number),
     leading: CircleAvatar(child: Text(contact.name[0])),
     onTap: () {
-      Controller().setIndex(index);
+      Singleton.setIndex(index);
       Navigator.push(
           context,
           MaterialPageRoute(
