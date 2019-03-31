@@ -24,7 +24,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: DetailPage(),
+      home: ContactPage(),
+      routes: <String, WidgetBuilder> {
+        '/contactpage' : (BuildContext context) => new ContactPage(),
+        '/detailpage' : (BuildContext context) => new DetailPage()
+      }
     );
   }
 }

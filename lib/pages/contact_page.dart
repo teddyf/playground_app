@@ -1,40 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:playground_app/models/contact.dart';
+import 'package:playground_app/services/contact-service.dart';
+import 'package:playground_app/pages/detail_page.dart';
+import 'package:playground_app/controller.dart';
 
 class ContactPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: _buildContent(),
-      ),
+      body: new FutureBuilder(
+        future: ContactService().getContacts(),
+        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+          if(snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasData) {
+            return new Container(
+              child: _buildContent(snapshot.data, context)
+            );
+          }
+          else {
+            return new ErrorWidget("Failed to load");
+          }
+        }
+          else {
+            return CircularProgressIndicator();
+          }
+        }
+      )
     );
   }
 
-  Widget _buildContent() {
+  Widget _buildContent(list, context) {
     return ListView.builder(
-        itemCount: allContacts.length,
+        itemCount: list.length,
         itemBuilder: (BuildContext content, int index) {
-          Contact contact = allContacts[index];
-          return ContactListTile(contact);
+          Contact contact = list[index];
+          return ContactListTile(contact, context, index);
         });
   }
 }
 
 class ContactListTile extends ListTile {
-  ContactListTile(Contact contact)
+  ContactListTile(Contact contact, BuildContext context, index)
       : super(
     title: Text(contact.name),
     subtitle: Text(contact.number),
     leading: CircleAvatar(child: Text(contact.name[0])),
-    onTap: () => {
+    onTap: () {
+      Controller().setIndex(index);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (BuildContext context) => new DetailPage()));
     }
   );
 }
-
-List<Contact> allContacts = [
-  Contact(name: 'Teddy Franceschi', email: 'ttf6@duke.edu', number: '(585)797-9725', imageUrl: 'playground_app/images/Teddy.jpg'),
-  Contact(name: 'Willie Franceschi', number: '(585)794-6700'),
-  Contact(name: 'Filip Steilber', number: '(917)696-9696')
-];
