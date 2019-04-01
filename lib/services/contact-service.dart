@@ -8,7 +8,7 @@ class ContactService {
 }
 
 List<Contact> allContacts = [
-  Contact(name: 'Teddy Franceschi', email: 'ttf6@duke.edu', number: '(585)797-9725', imageUrl: 'playground_app/images/Teddy.jpg'),
-  Contact(name: 'Willie Franceschi', email: 'whf3@jhu.edu', number: '(585)794-6700'),
-  Contact(name: 'Filip Steilberg', email: 'bbc69@duke.edu', number: '(917)696-9696'),
+  Contact(name: 'Teddy Franceschi', email: 'ttf6@duke.edu', number: '5857979725', imageUrl: 'playground_app/images/Teddy.jpg'),
+  Contact(name: 'Willie Franceschi', email: 'whf3@jhu.edu', number: '5857946700'),
+  Contact(name: 'Filip Steilberg', email: 'bbc69@duke.edu', number: '9176969696'),
 ];

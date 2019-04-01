@@ -4,6 +4,8 @@ import 'package:playground_app/widgets/contact_icon.dart';
 import 'package:playground_app/services/contact-service.dart';
 import 'package:playground_app/widgets/contact_tile.dart';
 import 'package:playground_app/singleton.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class DetailPage extends StatelessWidget {
   PageController controller = new PageController(initialPage: Singleton.getIndex());
@@ -72,24 +74,25 @@ class DetailCard extends Container {
           Row(
             children: <Widget>[
               Spacer(),
-              ContactIcon(Icons.message, "message", Colors.blue),
+              ContactIcon(Icons.message, "message", Colors.blue, "sms://${contact.number}"),
               Spacer(),
-              ContactIcon(Icons.phone, "call", Colors.blue),
+              ContactIcon(Icons.phone, "call", Colors.blue, "tel:${contact.number}"),
               Spacer(),
-              ContactIcon(Icons.videocam, "video", Colors.blue),
+              ContactIcon(Icons.videocam, "video", Colors.blue, "vid"),
               Spacer(),
-              ContactIcon(Icons.mail_outline, "mail", Colors.blue),
+              ContactIcon(Icons.mail_outline, "mail", Colors.blue, "mailto://${contact.email}"),
               Spacer(),
-              ContactIcon(Icons.attach_money, "pay", Colors.blue),
+              ContactIcon(Icons.attach_money, "pay", Colors.blue, "money"),
               Spacer(),
             ],
 
           ),
-          ContactTile("message", contact.number, () => {}),
-          ContactTile("mail", contact.email, () => {})
+          ContactTile("message", contact.number),
+          ContactTile("mail", contact.email)
 
 
         ],
       )
     );
 }
+
