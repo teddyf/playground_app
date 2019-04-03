@@ -4,7 +4,6 @@ import 'package:playground_app/widgets/contact_icon.dart';
 import 'package:playground_app/services/contact-service.dart';
 import 'package:playground_app/widgets/contact_tile.dart';
 import 'package:playground_app/singleton.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 
 class DetailPage extends StatelessWidget {
@@ -13,6 +12,11 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: new AppBar(
+        backgroundColor: Colors.transparent,
+        leading: BackButton(color: Colors.blue),
+        elevation: 0,
+      ),
       body: new FutureBuilder(
         future: ContactService().getContacts(),
         builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
@@ -50,14 +54,11 @@ class DetailCard extends Container {
     : super(
       child: Column(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(35.0),
-          ),
           CircleAvatar(
               child: Text(contact.name[0], style: new TextStyle(
                 fontSize: 30,
               )),
-              radius: 40,
+              radius: 50,
           ),
           Padding(
             padding: const EdgeInsets.all(5.0),
@@ -78,11 +79,7 @@ class DetailCard extends Container {
               Spacer(),
               ContactIcon(Icons.phone, "call", Colors.blue, "tel:${contact.number}"),
               Spacer(),
-              ContactIcon(Icons.videocam, "video", Colors.blue, "vid"),
-              Spacer(),
               ContactIcon(Icons.mail_outline, "mail", Colors.blue, "mailto://${contact.email}"),
-              Spacer(),
-              ContactIcon(Icons.attach_money, "pay", Colors.blue, "money"),
               Spacer(),
             ],
 
