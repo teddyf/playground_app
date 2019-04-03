@@ -18,6 +18,10 @@ class ContactService {
 
     return Future.value(results);
   }
+
+  int getIndex(Contact contact) {
+    return allContacts.indexOf(contact);
+  }
 }
 
 List<Contact> allContacts = [
