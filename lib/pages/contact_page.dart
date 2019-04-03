@@ -24,15 +24,6 @@ class ContactPageState extends State<ContactPage> {
     });
   }
 
-  Future<List<Contact>> getContacts() {
-    if(_query == "") {
-      return contactService.getContacts();
-    }
-    else {
-      return contactService.searchContacts(_query.toLowerCase());
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
 
@@ -60,24 +51,7 @@ class ContactPageState extends State<ContactPage> {
             ),
           ];
         },
-        body: new FutureBuilder(
-            future: getContacts(),
-            builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
-              if(snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  return new Container(
-                      child: _buildListView(snapshot.data, context)
-                  );
-                }
-                else {
-                  return new ErrorWidget("Failed to load");
-                }
-              }
-              else {
-                return CircularProgressIndicator();
-              }
-            }
-        )
+        body: _buildListView(contactService.searchContacts(_query), context)
       )
     );
   }
