@@ -15,6 +15,5 @@ class ContactTile extends Container {
           )
       )
 
-
   );
 }
