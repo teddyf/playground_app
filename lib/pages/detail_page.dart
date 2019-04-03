@@ -17,24 +17,7 @@ class DetailPage extends StatelessWidget {
         leading: BackButton(color: Colors.blue),
         elevation: 0,
       ),
-      body: new FutureBuilder(
-        future: ContactService().getContacts(),
-        builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
-          if(snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasData) {
-              return new Container(
-                  child: _buildContent(snapshot.data)
-              );
-            }
-            else {
-              return new ErrorWidget("Failed to load");
-            }
-          }
-          else {
-            return CircularProgressIndicator();
-          }
-        }
-      ),
+      body: _buildContent(ContactService().getContacts()),
     );
   }
 

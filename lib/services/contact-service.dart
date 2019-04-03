@@ -2,11 +2,14 @@ import 'package:playground_app/models/contact.dart';
 
 class ContactService {
 
-  Future<List<Contact>> getContacts() {
-    return Future.value(allContacts);
+  List<Contact> getContacts() {
+    return allContacts;
   }
 
-  Future<List<Contact>> searchContacts(String filter) {
+  List<Contact> searchContacts(String filter) {
+    if (filter == "") {
+      return getContacts();
+    }
     List<Contact> results= [];
     for(Contact contact in allContacts) {
 
@@ -16,7 +19,7 @@ class ContactService {
       }
     }
 
-    return Future.value(results);
+    return results;
   }
 
   int getIndex(Contact contact) {
