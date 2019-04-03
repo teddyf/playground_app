@@ -13,6 +13,8 @@ class ContactPage extends StatefulWidget {
 
 class ContactPageState extends State<ContactPage> {
 
+  ContactService contactService = new ContactService();
+
   String _query = "";
   List<Contact> contacts = [];
 
@@ -24,10 +26,10 @@ class ContactPageState extends State<ContactPage> {
 
   Future<List<Contact>> getContacts() {
     if(_query == "") {
-      return ContactService().getContacts();
+      return contactService.getContacts();
     }
     else {
-      return ContactService().searchContacts(_query.toLowerCase());
+      return contactService.searchContacts(_query.toLowerCase());
     }
   }
 
@@ -97,7 +99,7 @@ class ContactListTile extends ListTile {
     subtitle: Text(contact.number),
     leading: CircleAvatar(child: Text(contact.name[0])),
     onTap: () {
-      Singleton.setIndex(index);
+      Singleton.setIndex(ContactService().getIndex(contact));
       Navigator.push(
           context,
           MaterialPageRoute(
